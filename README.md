@@ -91,27 +91,24 @@ wheat-disease-api/
 ## Setup & Installation
 
 ```bash
-# 1. Clone/download the project, then navigate into it
-cd wheat-disease-api
-
-# 2. Create a virtual environment
+# Create and activate a virtual environment
 python -m venv venv
 
-# 3. Activate it
 # Windows:
 venv\Scripts\activate
 # Mac/Linux:
 source venv/bin/activate
 
-# 4. Install dependencies
-pip install fastapi uvicorn pillow python-multipart
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
-
-# 5. Run the server
-uvicorn app.main:app --reload
+# Install dependencies and start the API
+pip install -r requirements.txt
+uvicorn app.main:app --host 0.0.0.0 --port 8000
 ```
 
 The API will be available at `http://127.0.0.1:8000`, with interactive documentation at `http://127.0.0.1:8000/docs`.
+
+## Railway Deployment
+
+Deploy from the repository root so Railway uses the root `Procfile`, `requirements.txt`, `app/`, and `models/`. Set a strong `SECRET_KEY` in Railway's Variables and attach a PostgreSQL service so `DATABASE_URL` is provided. The Procfile starts Uvicorn on Railway's assigned port. The model weights and `models/class_names.json` must remain in the deployed repository.
 
 ## API Endpoints
 
